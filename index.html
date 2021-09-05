@@ -121,7 +121,7 @@ $(form).modal('show');
         scrollTop: $(".hospitals").offset().top},
         '1000');
 					date=''
-					hospitals+='   <div class="card">'
+					hospitals+='<div class="card">'
       				hospitals+='<div class="card-header border-0">'
                      hospitals+='<h3 class="mb-0">Hospitals</h3>'
                		hospitals+='</div>'
@@ -151,8 +151,8 @@ $(form).modal('show');
         			hospitals+=value.fee_type=="Free" ?
         			'<span class="badge rounded-pill bg-success">Free</span>' :'<span class="badge rounded-pill bg-danger">Paid</span>'
         			hospitals+='</td>'
-        			hospitals+='<td>'+value.available_capacity_dose1+'</td>'
-        			hospitals+='<td>'+value.available_capacity_dose2+'</td>'
+        			hospitals+='<td>'+value.available_capacity_dose1+'nos</td>'
+        			hospitals+='<td>'+value.available_capacity_dose2+'nos</td>'
         			hospitals+='<td>₹'+value.fee+'</td>'
         			if(value.max_age_limit==undefined){
         				value.max_age_limit=''
