@@ -14,9 +14,9 @@
    <body class="bg-light">
       <div class="container p-3">
         <div class="row">
-         <div class="all-states col">
+         <div class="all-states col-6 col-sm-12">
          </div>
-         <div class="districts col">
+         <div class="districts col-6 col-sm-12">
          </div>
         </div>
          <div class="hospitals mt-4 col">
@@ -40,8 +40,8 @@
       			success:function(data){
       			var states=''
       			states+='<h5>SELECT STATE</h5>'
-            states+='<div class="form-group">'
-            states+='<select class="form-select states" aria-label="Default select example">'
+            		states+='<div class="form-group">'
+            		states+='<select class="form-select states" aria-label="Default select example">'
         		states+='<option>Choose State</option>'
       			$.each(data.states,function(index,value){
         			states+='<option value="'+value.state_id+'">'+value.state_name+'</option>'
@@ -49,7 +49,7 @@
       			states+='</div>'
             states+='</select>'
       			$('.all-states').html(states)
-      	    	$('.states').select2();
+      	    		$('.states').select2();
       			}
       		})
       	}
@@ -62,14 +62,14 @@
       			contentType: "application/json; charset=utf-8",
       			success:function(data){
       				districts+='<h5>SELECT DISTRICT</h5>'
-              districts+='<div class="form-group">'
+              			districts+='<div class="form-group">'
       				districts+='<select class="form-select all-districts">'
         			districts+='<option>Choose District</option>'
       			 $.each(data.districts,function(index,value){
         			districts+='<option value="'+value.district_id+'">'+value.district_name+'</option>'
       			 })
       			 districts+='</div>'
-             districts+='</select>'
+            		 districts+='</select>'
       			$('.districts').html(districts)
       			$('.all-districts').select2()
       			}
@@ -79,28 +79,28 @@
       $(document).on('change','.all-districts',function(){
       	var district_id=$(this).val()
       		var form=''
-      		form+='<div class="modal fade" id="availability-modal" tabindex="-1"  aria-hidden="true">'
-  				form+='<div class="modal-dialog">'
-          form+='<div class="modal-content">'
-          form+='<div class="modal-header">'
-          form+='<h5 class="modal-title" id="exampleModalLabel">Choose Date</h5>'
-          form+='<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>'
-          form+='</div>'
-          form+='<div class="modal-body">'
-          form+='<form class="show-hospital">'
-          form+='<div class="mb-3">'
-          form+='<label class="col-form-label">Choose Date:</label>'
-          form+='<input type="date" class="form-control available-date">'
-          form+='</div>'
-          form+='</form>'
-          form+='</div>'
-          form+='<div class="modal-footer">'
-          form+='<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>'
-          form+='<button type="button" class="btn btn-primary" onclick="showHospitals('+district_id+')">Submit</button>'
-          form+='</div>'
-          form+='</div>'
-          form+='</div>'
-          form+='</div>'
+      		  form+='<div class="modal fade" id="availability-modal" tabindex="-1"  aria-hidden="true">'
+  		  form+='<div class="modal-dialog">'
+		  form+='<div class="modal-content">'
+		  form+='<div class="modal-header">'
+		  form+='<h5 class="modal-title" id="exampleModalLabel">Choose Date</h5>'
+		  form+='<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>'
+		  form+='</div>'
+		  form+='<div class="modal-body">'
+		  form+='<form class="show-hospital">'
+		  form+='<div class="mb-3">'
+		  form+='<label class="col-form-label">Choose Date:</label>'
+		  form+='<input type="date" class="form-control available-date">'
+		  form+='</div>'
+		  form+='</form>'
+		  form+='</div>'
+		  form+='<div class="modal-footer">'
+		  form+='<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>'
+		  form+='<button type="button" class="btn btn-primary" onclick="showHospitals('+district_id+')">Submit</button>'
+		  form+='</div>'
+		  form+='</div>'
+		  form+='</div>'
+		  form+='</div>'
           $(form).modal('show');
       })
 
@@ -115,14 +115,12 @@
 				success:function(data){
 					$('#availability-modal').modal('hide');
 					$('#availability-modal').remove();
-					$('html,body').animate({
-        scrollTop: $(".hospitals").offset().top},
-        '1000');
+					$('html,body').animate({scrollTop: $(".hospitals").offset().top},'1000');
 				date=''
 				  hospitals+='<div class="card">'
       		hospitals+='<div class="card-header border border-primary bg-primary">'
-          hospitals+='<h3 class="mb-0 text-white">Hospitals</h3>'
-          hospitals+='</div>'
+          	hospitals+='<h3 class="mb-0 text-white">Hospitals</h3>'
+          	hospitals+='</div>'
       		hospitals+='<div class="table-responsive p-3">'
         	hospitals+='<table class="table table-hover datatable">'
       		hospitals+='<thead>'
@@ -153,7 +151,7 @@
           			hospitals+='<td>'+value.available_capacity_dose2+'nos</td>'
           			hospitals+='<td>₹'+value.fee+'</td>'
           			if(value.max_age_limit==undefined){
-          				value.max_age_limit='+'
+          				value.max_age_limit='& above'
           			}else{
           				value.max_age_limit='-' +value.max_age_limit
           			}
@@ -161,7 +159,7 @@
           			hospitals+='<td>'+value.vaccine+'</td>'
           			hospitals+='<td>'
           			$.each(value.slots,function(ind,availableslots){
-          			   hospitals+='<p class="border border-primary">'+availableslots+'<p>'
+          			   hospitals+='<p class="border border-primary p-2">'+availableslots+'<p>'
           			})
           			hospitals+='</td>'
         			  hospitals+='</tr>'
