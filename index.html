@@ -4,177 +4,179 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta name="description" content="Cowin web app lists all vaccinnation providers based on your cities in india">
-      <meta name="keywords" content="cowin web app,Covid-19 vaccination providers- india,covid-19 vaccination providers near me,cowin web app github">
-      <title>Covid-19 Vaccination Providers - India</title>
+      <meta name="keywords" content="cowin web app,cowin web app india,covid 19 vaccination providers near me,cowin web app github">
+      <title>Cowin App</title>
       <!-- css -->
       <link rel="stylesheet" href="assets/css/bootstrap.min.css">
       <link href="assets/css/select2.min.css" rel="stylesheet" />
       <link rel="stylesheet" type="text/css" href="assets/css/dataTables.bootstrap5.min.css">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-      <link rel="stylesheet" type="text/css" href="assets/css/custom.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css" integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous">
    </head>
-   <body>
-      <div class="container-fluid bg-primary text-center text-white p-4">
-         <h5>Covid-19 vaccination providers - India</h5>
-      </div>
-      <div class="container-fluid p-3">
-         <form>
-            <div class="row">
-               <div class="all-states col-lg-4 col-sm-12 mb-3">
-               </div>
-               <div class="districts col-lg-4 col-sm-12">
-               </div>
-               <div class="date col-lg-4 col-sm-12 ">
-               </div>
-            </div>
-         </form>
+   <body class="bg-light">
+      <div class="container p-3">
+        <div class="row">
+         <div class="all-states col-lg-6 col-sm-12 mb-3">
+         </div>
+         <div class="districts col-lg-6 col-sm-12">
+         </div>
+        </div>
          <div class="hospitals mt-4 col">
          </div>
       </div>
    </body>
    <!-- js -->
-   <script src="assets/js/jquery-3.6.0.min.js"></script>
-   <script src="assets/js/bootstrap.min.js"></script>
-   <script  src="assets/js/jquery.dataTables.min.js"></script>
-   <script src="assets/js/dataTables.bootstrap5.min.js"></script>
-   <script src="assets/js/select2.min.js"></script>
-   <script type="text/javascript">
+  <script src="assets/js/jquery-3.6.0.min.js"></script>
+  <script src="assets/js/bootstrap.min.js"></script>
+  <script  src="assets/js/jquery.dataTables.min.js"></script>
+  <script src="assets/js/dataTables.bootstrap5.min.js"></script>
+  <script src="assets/js/select2.min.js"></script>
+  <script type="text/javascript">
       $(document).ready(function(){
-        getStates();
-        function getStates(){
-          $.ajax({
-            url:"https://cdn-api.co-vin.in/api/v2/admin/location/states",
-            method:"get",
-            contentType: "application/json; charset=utf-8",
-            success:function(data){
-            var states=''
-            states+='<h5>SELECT STATE</h5>'
-                states+='<div class="form-group">'
-                states+='<select class="form-select states" aria-label="Default select example">'
-            states+='<option>Choose State</option>'
-            $.each(data.states,function(index,value){
-              states+='<option value="'+value.state_id+'">'+value.state_name+'</option>'
-            })
-            states+='</div>'
-                states+='</select>'
-            $('.all-states').html(states)
-                $('.states').select2();
-            }
-          })
-        }
-        $(document).on('change','.states',function(){
-           var state_id=$(this).val();
-           var districts=''
-          $.ajax({
-            url:"https://cdn-api.co-vin.in/api/v2/admin/location/districts/"+state_id,
-            method:"get",
-            contentType: "application/json; charset=utf-8",
-            success:function(data){
-              districts+='<h5>SELECT DISTRICT</h5>'
-                    districts+='<div class="form-group">'
-              districts+='<select class="form-select all-districts">'
-              districts+='<option>Choose District</option>'
-             $.each(data.districts,function(index,value){
-              districts+='<option value="'+value.district_id+'">'+value.district_name+'</option>'
-             })
-             districts+='</div>'
-                 districts+='</select>'
-            $('.districts').html(districts)
-            $('.all-districts').select2()
-            }
-          })
-        })
+      	getStates();
+      	function getStates(){
+      		$.ajax({
+      			url:"https://cdn-api.co-vin.in/api/v2/admin/location/states",
+      			method:"get",
+      			contentType: "application/json; charset=utf-8",
+      			success:function(data){
+      			var states=''
+      			states+='<h5>SELECT STATE</h5>'
+            		states+='<div class="form-group">'
+            		states+='<select class="form-select states" aria-label="Default select example">'
+        		states+='<option>Choose State</option>'
+      			$.each(data.states,function(index,value){
+        			states+='<option value="'+value.state_id+'">'+value.state_name+'</option>'
+      			})
+      			states+='</div>'
+            		states+='</select>'
+      			$('.all-states').html(states)
+      	    		$('.states').select2();
+      			}
+      		})
+      	}
+      	$(document).on('change','.states',function(){
+      	   var state_id=$(this).val();
+      	   var districts=''
+      		$.ajax({
+      			url:"https://cdn-api.co-vin.in/api/v2/admin/location/districts/"+state_id,
+      			method:"get",
+      			contentType: "application/json; charset=utf-8",
+      			success:function(data){
+      				districts+='<h5>SELECT DISTRICT</h5>'
+              			districts+='<div class="form-group">'
+      				districts+='<select class="form-select all-districts">'
+        			districts+='<option>Choose District</option>'
+      			 $.each(data.districts,function(index,value){
+        			districts+='<option value="'+value.district_id+'">'+value.district_name+'</option>'
+      			 })
+      			 districts+='</div>'
+            		 districts+='</select>'
+      			$('.districts').html(districts)
+      			$('.all-districts').select2()
+      			}
+      		})
+      	})
       })
       $(document).on('change','.all-districts',function(){
-        var district_id=$(this).val()
-        $('.date-picker').remove()
-      var date='<div class="date-picker"><h5>SELECT DATE</h5><input type="date" class="selected-date form-control" name="date"></div>'
-      $('.date').append(date)
+      	var district_id=$(this).val()
+      		var form=''
+      		  form+='<div class="modal fade" id="availability-modal" tabindex="-1"  aria-hidden="true">'
+  		  form+='<div class="modal-dialog">'
+		  form+='<div class="modal-content">'
+		  form+='<div class="modal-header">'
+		  form+='<h5 class="modal-title" id="exampleModalLabel">Choose Date</h5>'
+		  form+='<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>'
+		  form+='</div>'
+		  form+='<div class="modal-body">'
+		  form+='<form class="show-hospital">'
+		  form+='<div class="mb-3">'
+		  form+='<label class="col-form-label">Choose Date:</label>'
+		  form+='<input type="date" class="form-control available-date">'
+		  form+='</div>'
+		  form+='</form>'
+		  form+='</div>'
+		  form+='<div class="modal-footer">'
+		  form+='<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>'
+		  form+='<button type="button" class="btn btn-primary" onclick="showHospitals('+district_id+')">Submit</button>'
+		  form+='</div>'
+		  form+='</div>'
+		  form+='</div>'
+		  form+='</div>'
+          $(form).modal('show');
       })
-      $(document).on('change','.selected-date',function(){
-        var currentValue=$(this).closest('form')
-        var district_id=currentValue.find('.all-districts').val()
-      var date=$('.selected-date').val().split("-").reverse().join("-")
-      showHospitals(district_id,date)
-      })
-      
-      function showHospitals(district_id,date){
-      var hospitals=''
-      $.ajax({
-      url:"https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id="+district_id+"&date="+date+"",
-      method:"get",
-      contentType: "application/json; charset=utf-8",
-      success:function(data){
-      $('html,body').animate({scrollTop: $(".hospitals").offset().top},'1000');
-      var blocks = [...new Map(data.sessions.map(item =>
-            [item['block_name'], item])).values()];
-          if(blocks.length>2){
-        hospitals+='<div class="d-flex blocks">'
-        hospitals+='<div class="col">'
-      hospitals+='<button type="button" class="btn mx-1 btn-outline-primary categories rounded-pill" data-filter="all">All</button></div>'
-      $.each(blocks,function(ind,value) {
-          hospitals+='<div class="col ">'
-          
-      hospitals+='<button class="btn mx-1 btn-outline-primary categories rounded-pill" data-filter="'+value.block_name.replace(/ /g,"-")+'">'+value.block_name+'</div>'
-      })
-            hospitals+='</div>'
-            }
-          hospitals+='<h5>Hospitals available on- '+date+'</h5>'
-      
-                  hospitals+='<div class="row">'
-            $.each(data.sessions,function(index,value){
-                  hospitals+='<div class="col-lg-3 details col-sm-12 p-3 '+value.block_name.replace(/ /g,"-")+' ">'
-                 hospitals+='<div class="card border-0 ">'
-      hospitals+='<div class="card-header bg-primary text-white text-wrap" data-bs-target="#collapse-'+value.center_id+'">'
-      hospitals+='<i class="fa fa-plus-square fa-2x"></i><span class="h-name mx-2">'
-      +value.name+'</span><i class="fa fa-chevron-down mt-2" ></i></div>'
-      hospitals+='<div class="card-body" id="collapse-'+value.center_id+'">'
-      hospitals+='<p><i class="fas fa-map-marker mx-1"></i>'+value.address+'</p>'
-      hospitals+='<p><i class="fas fa-rupee-sign mx-1"></i>'+value.fee+'</p>'
-      hospitals+='<p><i class="fas fa-syringe mx-1"></i>'+value.vaccine+ ' (<b>'+value.available_capacity+'</b>) </p>'
-      hospitals+='<div class="mx-4 mb-1">Dose 1 - <b>'+value.available_capacity_dose1+'</b></div>'
-      hospitals+='<div class="mx-4 mb-3">Dose 2 - <b>'+value.available_capacity_dose2+'</b></div>'
-      if(value.max_age_limit==undefined){
-                  value.max_age_limit=' & above'
-                }else{
-                  value.max_age_limit= ' - ' +value.max_age_limit
-                }
-      
-      hospitals+='<p>Age Limit - <span ><b>'+value.min_age_limit + value.max_age_limit +'</b></span></p>'
-      hospitals+='<p><i class="far fa-clock mx-1"></i>Timings</p>'
-                $.each(value.slots,function(ind,availableslots){
-                   hospitals+='<p class="rounded border slots border-primary text-center">'+availableslots+'</p>'
-                })
-      
-      
-      hospitals+='</div>'
-      hospitals+='</div>'
-      hospitals+='</div>'
-      
-            })
-      hospitals+='</div>'
-            $('.hospitals').html(hospitals)
-      }
-      })
-      }
-      $(document).on('click',".card",function(){
-      $(this).find(".card-body").toggle();
-      $('.card-body').click(function(){return false;});
-      
-      });
-      $(document).on('click','.categories',function(){
-        $('.categories').removeClass('active');
-        $(this).addClass('active');
-      var category=$(this).data('filter');
-        $('.details').each(function(){
-        if(category=='all'){
-          $(this).show()
-      
-        }else{
-          $(this).show()
-       $(this).hide().filter('.' + category).show();
-        }
-        })
-      })
-   </script>
+
+      function showHospitals(district_id){
+  			var date=$('.available-date').val()
+  			var newDate = date.split("-").reverse().join("-");
+  			var hospitals=''
+  			$.ajax({
+				url:"https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id="+district_id+"&date="+newDate+"",
+				method:"get",
+				contentType: "application/json; charset=utf-8",
+				success:function(data){
+					$('#availability-modal').modal('hide');
+					$('#availability-modal').remove();
+					$('html,body').animate({scrollTop: $(".hospitals").offset().top},'1000');
+				date=''
+				  hospitals+='<div class="card">'
+      		hospitals+='<div class="card-header border border-primary bg-primary">'
+          	hospitals+='<h3 class="mb-0 text-white">Hospitals</h3>'
+          	hospitals+='</div>'
+      		hospitals+='<div class="table-responsive p-3">'
+        	hospitals+='<table class="table table-hover datatable">'
+      		hospitals+='<thead>'
+      		hospitals+='<th>S.No</th>'
+      		hospitals+='<th>Name</th>'
+      		hospitals+='<th>Address</th>'
+    			hospitals+='<th>Block Name</th>'
+    			hospitals+='<th>Fee Type</th>'
+    			hospitals+='<th>Dose 1</th>'
+    			hospitals+='<th>Dose 2</th>'
+    			hospitals+='<th>Amount</th>'
+    			hospitals+='<th>Age Limit</th>'
+    			hospitals+='<th>Vaccine</th>'
+    			hospitals+='<th>Available Timings</th>'
+    			hospitals+='</thead>'
+    			hospitals+='<tbody>'
+      			$.each(data.sessions,function(index,value){
+          			hospitals+='<tr>'
+          			hospitals+='<td>'+(index+1)+'</td>'
+          			hospitals+='<td>'+value.name+'</td>'
+          			hospitals+='<td>'+value.address+'</td>'
+          			hospitals+='<td>'+value.block_name+'</td>'
+          			hospitals+='<td>'
+          			hospitals+=value.fee_type=="Free" ?
+          			'<span class="badge rounded-pill bg-success">Free</span>' :'<span class="badge rounded-pill bg-danger">Paid</span>'
+          			hospitals+='</td>'
+          			hospitals+='<td>'+value.available_capacity_dose1+'nos</td>'
+          			hospitals+='<td>'+value.available_capacity_dose2+'nos</td>'
+          			hospitals+='<td>₹'+value.fee+'</td>'
+          			if(value.max_age_limit==undefined){
+          				value.max_age_limit='& above'
+          			}else{
+          				value.max_age_limit='-' +value.max_age_limit
+          			}
+          			hospitals+='<td>'+value.min_age_limit+value.max_age_limit+'</td>'
+          			hospitals+='<td>'+value.vaccine+'</td>'
+          			hospitals+='<td>'
+          			$.each(value.slots,function(ind,availableslots){
+          			   hospitals+='<p class="border border-primary p-2">'+availableslots+'<p>'
+          			})
+          			hospitals+='</td>'
+        			  hospitals+='</tr>'
+      			})
+      			hospitals+='</tbody>'
+      			hospitals+='</table>'
+      			hospitals+='</div>'
+      			hospitals+='</div>'
+      			$('.hospitals').html(hospitals)
+      			$('.datatable').dataTable({
+    				"language": {
+      				"emptyTable": "No vaccination providers are available in this date"
+    				}
+    			})
+			}
+			})
+		}   
+  </script>
 </html>
