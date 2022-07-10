@@ -42,7 +42,16 @@ i.fa.fa-chevron-down {
 .btn-outline-primary:focus {
   box-shadow: none!important;
 }
-
+.alert-blinking{
+  animation:blinkingText 1.2s infinite;
+}
+@keyframes blinkingText{
+    0%{     color: #ff007b;    }
+    49%{    color: #ff007b; }
+    60%{    color: transparent; }
+    99%{    color:transparent;  }
+    100%{   color: #ff007b;    }
+}
 @media screen and (max-width: 600px) {
   .card {
     box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15)!important;

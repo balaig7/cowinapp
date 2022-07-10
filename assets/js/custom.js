@@ -71,7 +71,7 @@ function showHospitals(district_id, date) {
 
             var blocks = [...new Map(data.sessions.map(item => [item['block_name'], item])).values()];
             if (blocks.length > 2) {
-                hospitals += '<div class="d-flex blocks justify-content-md-center">'
+                hospitals += '<div class="d-flex blocks justify-content-md-center mb-4">'
                 hospitals += '<div>'
                 hospitals += '<button type="button" class="btn mx-1 btn-outline-primary categories rounded-pill" data-filter="all">All</button></div>'
                 $.each(blocks, function(ind, value) {
@@ -81,7 +81,7 @@ function showHospitals(district_id, date) {
                 })
                 hospitals += '</div>'
             }
-            hospitals += '<h5>Hospitals available on (' + date + ')</h5>'
+            hospitals += '<marquee><h5 class="mb-4 text-primary">Hospitals available on (' + date + ')</h5></marquee>'
 
             hospitals += '<div class="row">'
             if(data.sessions.length>0){
@@ -116,7 +116,7 @@ function showHospitals(district_id, date) {
 
                 })
             }else{
-                hospitals +='<h4 class="text-center" style="margin-top:10%">Sorry no vaccination providers available in this date</h4>'
+                hospitals +='<h4 class="text-center alert-blinking " style="margin-top:10%">Sorry no vaccination providers available in this date</h4>'
             }
             hospitals += '</div>'
             $('.hospitals').html(hospitals)
